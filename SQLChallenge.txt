@@ -1,0 +1,63 @@
+1. SHOW DATABASES;
+  USE world;
+  SHOW TABLES;
+  DESCRIBE city;
+SELECT * FROM city;
+SELECT COUNT(CountryCode) FROM city WHERE CountryCode='USA';
+
+2.DESCRIBE country;
+SELECT Population, LifeExpectancy FROM country WHERE name='Argentina';
+
+3.SELECT name, LifeExpectancy 
+FROM country
+WHERE LifeExpectancy=(
+SELECT MAX(LifeExpectancy) FROM country
+WHERE LifeExpectancy IS NOT NULL
+ORDER BY LifeExpectancy DESC LIMIT 3
+);
+
+4.SELECT * FROM country;
+SELECT * FROM city;
+SELECT ci.Name
+FROM city ci
+JOIN country c ON c.Capital=ci.ID
+WHERE c.name='Spain';
+
+5.SELECT * FROM countrylanguage;
+SELECT * FROM country;
+SELECT cl.Language
+FROM countrylanguage cl
+JOIN country c ON c.Code=cl.CountryCode
+WHERE c.Region='Southeast Asia';
+
+6.SELECT * FROM city;
+SELECT Name FROM city
+WHERE Name LIKE 'F%'
+LIMIT 25;
+
+7.SELECT COUNT(ci.ID)
+FROM city ci
+JOIN country c ON c.code=ci.countrycode
+WHERE c.name='China';
+
+7.SELECT COUNT(*) 
+FROM city ci 
+JOIN country c ON c.code=ci.countrycode 
+WHERE c.name='China';
+
+8.SELECT name, Population 
+FROM country
+WHERE Population=(
+SELECT MIN(Population) FROM country
+WHERE Population IS NOT NULL AND Population!=0
+ORDER BY Population DESC LIMIT 7
+);
+
+9.SELECT * FROM country;
+SELECT DISTINCT COUNT(Code) FROM country;
+
+10.SELECT* FROM Country;
+SELECT Name, SurfaceArea 
+FROM Country 
+ORDER BY SurfaceArea 
+DESC LIMIT 10;
