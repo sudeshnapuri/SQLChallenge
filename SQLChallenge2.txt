@@ -1,0 +1,103 @@
+SHOW DATABASES;
+  USE sakila;
+  SHOW TABLES;
+  
+SELECT * FROM actor;
+  
+SELECT last_name FROM actor
+WHERE first_name='John';
+  
+SELECT first_name, last_name FROM actor
+WHERE last_name='Neeson';
+
+SELECT * FROM actor
+WHERE actor_id % 10=0;
+
+SELECT * FROM film;
+SELECT description, title FROM film
+WHERE film_id=100;
+
+SELECT title FROM film
+WHERE rating='R';
+
+SELECT title FROM film
+WHERE rating!='R';
+
+SELECT title, length FROM film
+ORDER BY length 
+LIMIT 10;
+
+SELECT title, length FROM film
+WHERE length=(
+SELECT MAX(length)
+FROM film
+);
+
+SELECT title, special_features FROM film
+WHERE special_features LIKE '%Deleted Scenes%';
+
+SELECT * FROM actor;
+SELECT last_name FROM actor
+GROUP BY last_name HAVING COUNT(last_name)=1;
+
+SELECT * FROM actor;
+SELECT last_name FROM actor
+GROUP BY last_name HAVING COUNT(last_name)=1;
+
+SELECT * FROM actor;
+SELECT last_name FROM actor
+GROUP BY last_name HAVING COUNT(last_name)>1
+ORDER BY COUNT(last_name) DESC;
+
+SELECT a.first_name, a.last_name
+FROM actor a
+JOIN film_actor f ON f.actor_id=a.actor_id
+GROUP BY f.actor_id
+ORDER BY COUNT(f.actor_id) DESC
+LIMIT 1;
+
+QUESTION 14 SKIPPED
+
+SELECT * FROM film;
+SELECT AVG(length) FROM film;
+
+SELECT AVG(f.length), fc.category_id, c.name
+FROM film f
+JOIN film_category fc ON fc.film_id=f.film_id
+JOIN category c ON fc.category_id=c.category_id
+GROUP BY c.name;
+
+SELECT title, description FROM film
+WHERE description LIKE '%robot%';
+
+SELECT COUNT(title) FROM film
+WHERE release_year=2010;
+
+SELECT f.title, fc.category_id, c.name
+FROM film f
+JOIN film_category fc ON fc.film_id=f.film_id
+JOIN category c ON fc.category_id=c.category_id
+WHERE c.name='Horror';
+
+SELECT first_name, last_name
+FROM staff
+WHERE staff_id=2;
+
+SELECT f.title, a.first_name, a.last_name
+FROM actor a
+JOIN film_actor fa ON fa.actor_id=a.actor_id
+JOIN film f ON f.film_id=fa.film_id
+WHERE a.first_name='Fred' AND a.last_name='Costner';
+
+SELECT * FROM country;
+SELECT COUNT(DISTINCT country) FROM country;
+
+SELECT * FROM language
+ORDER BY name DESC;
+
+SELECT first_name, last_name FROM actor
+WHERE last_name LIKE '%son';
+
+SELECT * FROM film_list;
+SELECT category, COUNT(title) FROM film_list
+GROUP BY category;
